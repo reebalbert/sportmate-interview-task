@@ -1,0 +1,72 @@
+{
+    "navigation": {
+        "appName": "GitHub Repository Sync",
+        "syncTargets": "Sync Targets",
+        "failedJobs": "Failed Jobs"
+    },
+    "syncTargets": {
+        "title": "Synchronization Targets",
+        "description": "Manage GitHub users and organizations to synchronize.",
+        "fields": {
+            "name": "GitHub username or organization",
+            "namePlaceholder": "e.g. laravel",
+            "type": "Type"
+        },
+        "types": {
+            "user": "User",
+            "organization": "Organization"
+        },
+        "actions": {
+            "add": "Add target",
+            "adding": "Adding...",
+            "sync": "Sync",
+            "syncing": "Syncing..."
+        },
+        "empty": "No synchronization targets have been added yet.",
+        "statuses": {
+            "never_synced": "Never synced",
+            "syncing": "Syncing",
+            "synced": "Synced",
+            "failed": "Failed"
+        },
+        "repositories": {
+            "title": "Repositories",
+            "empty": "No repositories synchronized yet.",
+            "noResults": "No repositories match the current filters.",
+            "search": "Search repositories",
+            "searchPlaceholder": "Search by name or description...",
+            "allLanguages": "All languages",
+            "stars": "Stars",
+            "openIssues": "Open issues",
+            "language": "Language",
+            "updated": "Updated",
+            "archived": "Archived"
+        },
+        "stats": {
+            "repositories": "Repositories",
+            "stars": "Total stars",
+            "issues": "Open issues"
+        },
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next"
+        },
+        "errors": {
+            "syncFailed": "Repository synchronization failed. Please try again later."
+        }
+    },
+    "failedJobs": {
+        "title": "Failed Jobs",
+        "description": "View and retry failed queue jobs.",
+        "empty": "No failed jobs.",
+        "fields": {
+            "connection": "Connection",
+            "queue": "Queue",
+            "failedAt": "Failed at"
+        },
+        "actions": {
+            "retry": "Retry",
+            "retrying": "Retrying..."
+        }
+    }
+}

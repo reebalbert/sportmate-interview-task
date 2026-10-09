@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Enums\SyncTargetType;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,14 +17,24 @@ class StoreSyncTargetRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Normalize the synchronization target data before validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => strtolower(trim((string) $this->input('name'))),
+        ]);
+    }
+
+    /**
+     * Get the validation rules for storing a synchronization target.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', Rule::unique('sync_targets', 'name')],
             'type' => ['required', Rule::enum(SyncTargetType::class)],
         ];
     }

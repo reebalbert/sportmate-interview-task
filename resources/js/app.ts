@@ -4,6 +4,8 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
+import { i18n } from '@/i18n';
+import type { DirectiveBinding } from 'vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -17,14 +19,20 @@ void createInertiaApp({
                 return AuthLayout;
             case name.startsWith('settings/'):
                 return [AppLayout, SettingsLayout];
+            case name.startsWith('sync-targets/'):
+                return null;
+            case name.startsWith('failed-jobs/'):
+                return null;
             default:
                 return AppLayout;
         }
     },
     withApp: (app) => {
+        app.use(i18n);
+
         app.directive('focus', {
-            mounted: (el: HTMLElement, shouldFocus) => {
-                if (shouldFocus.value !== false) {
+            mounted: (el: HTMLElement, binding: DirectiveBinding<boolean>) => {
+                if (binding.value !== false) {
                     el.focus();
                 }
             },

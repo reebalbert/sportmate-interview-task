@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('last_synced_at')->nullable();
             $table->text('last_error')->nullable();
             $table->timestamps();
-            $table->unique(['name', 'type']);
+            $table->unique('name');
         });
     }
 
