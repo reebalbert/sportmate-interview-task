@@ -6,9 +6,12 @@ use App\Enums\SyncStatus;
 use App\Enums\SyncTargetType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SyncTarget extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'name',
         'type',

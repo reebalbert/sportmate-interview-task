@@ -1,4 +1,20 @@
 {
+    "welcome": {
+        "title": "GitHub Repository Sync",
+        "badge": "GitHub API",
+        "description": "Synchronize and explore GitHub repositories from users and organizations. Monitor synchronization progress and manage background jobs.",
+        "targets": {
+            "title": "Synchronization Targets",
+            "description": "Manage GitHub users and organizations, synchronize their repositories and browse locally stored data.",
+            "action": "Manage targets"
+        },
+        "failedJobs": {
+            "title": "Failed Jobs",
+            "description": "Review failed synchronization jobs, inspect errors and retry unsuccessful operations.",
+            "action": "View failed jobs"
+        },
+        "footer": "Built with Laravel, Vue and the GitHub REST API <br> Reéb Albert"
+    },
     "navigation": {
         "appName": "GitHub Repository Sync",
         "syncTargets": "Sync Targets",

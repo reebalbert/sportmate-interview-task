@@ -604,12 +604,7 @@ defineOptions({
                             <span> ★ {{ repository.stargazers_count }} </span>
 
                             <span>
-                                {{
-                                    t(
-                                        'syncTargets.repositories.openIssues',
-                                    )
-                                }}:
-                                {{ repository.open_issues_count }}
+                                {{ t('syncTargets.repositories.openIssues') }}: {{ repository.open_issues_count }}
                             </span>
                         </div>
                     </article>

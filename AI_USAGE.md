@@ -1,3 +1,4 @@
+
 # AI Usage
 
 AI tools were used as a development assistant during this assignment.
@@ -16,7 +17,8 @@ AI was primarily used for:
 - suggesting test cases and edge cases;
 - improving the user interface and user experience;
 - reviewing the implementation against the assignment requirements;
-- discussing synchronization reliability and concurrency handling.
+- discussing synchronization reliability and concurrency handling;
+- designing and testing a versioned REST API using Laravel Sanctum.
 
 AI was used as an assistant rather than as an autonomous implementation tool. Suggested approaches and generated code were reviewed and adjusted before being added to the project.
 
@@ -36,6 +38,9 @@ Examples of instructions and questions given to the AI included:
 - how to implement MySQL FULLTEXT search across repository data and README content;
 - how to structure Vue/Inertia repository search, filtering and pagination;
 - how to improve synchronization status feedback in the UI;
+- how to implement a versioned REST API using Laravel Sanctum authentication;
+- how to reuse existing validation and synchronization services in API controllers;
+- how to structure API Resources and test authenticated API endpoints;
 - how to review the implementation against the assignment requirements.
 
 The AI was also instructed to favor maintainable Laravel conventions, avoid unnecessary complexity, and keep the implementation focused on the scope of the assignment.
@@ -55,7 +60,10 @@ AI assistance was particularly useful in:
 - troubleshooting Node/Vite, Laravel and PHPUnit environment issues;
 - implementing and refining repository search using MySQL FULLTEXT;
 - refining frontend filtering, pagination and synchronization status handling;
-- improving the visual design of the synchronization interface.
+- improving the visual design of the synchronization interface;
+- implementing REST API endpoints for synchronization targets and repositories;
+- implementing Laravel Sanctum token-based authentication;
+- writing REST API Feature tests for authentication, validation, synchronization and repository retrieval.
 
 ## Suggestions Changed or Rejected
 
@@ -63,14 +71,15 @@ AI suggestions were not applied automatically. Several suggestions were adjusted
 
 Examples include:
 
-- authentication was not required for synchronization targets, despite being available in the Laravel starter kit;
+- authentication was not required for synchronization targets in the original assignment, but Laravel Sanctum authentication was introduced to protect the optional REST API;
 - synchronization target names were made unique regardless of whether the target is a user or organization;
 - unnecessary architectural abstractions were avoided where Laravel's existing features were sufficient;
 - repository search was implemented on the backend using MySQL FULLTEXT, while language filtering and pagination remained client-side because of the expected dataset size;
 - polling was preferred over introducing WebSockets for synchronization status updates;
 - synchronization initialization was moved into a shared service instead of duplicating the logic between manual and scheduled synchronization;
 - additional reliability mechanisms, such as automatic recovery of synchronization processes stuck in a running state, were considered but not implemented to avoid unnecessary complexity;
-- larger optional features such as a REST API and multitenancy were not implemented in order to keep the solution focused.
+- the REST API was implemented as a focused optional feature, exposing the main synchronization operations without duplicating every web interface functionality;
+- multitenancy was not implemented to keep the solution focused on the core requirements and selected optional features.
 
 ## Validation
 
@@ -83,7 +92,9 @@ AI-generated suggestions were validated through:
 - manual synchronization against the GitHub API;
 - reviewing queue retries, failure handling and synchronization logs;
 - frontend testing of synchronization, searching, filtering and pagination;
-- Laravel, TypeScript and frontend build checks.
+- Laravel, TypeScript and frontend build checks;
+- REST API endpoint testing using Laravel Sanctum authentication;
+- API Feature tests covering authentication, target retrieval and creation, duplicate validation, synchronization dispatch and repository retrieval.
 
 Where AI suggestions did not match the requirements or the project's implementation decisions, they were modified or discarded.
 
