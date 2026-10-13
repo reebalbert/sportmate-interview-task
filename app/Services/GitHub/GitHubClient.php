@@ -83,21 +83,16 @@ class GitHubClient
     }
 
     /**
-     * Check whether the GitHub target exists.
-     * 
-     * @param string $name The name of the target (user or organization).
-     * @param SyncTargetType $type The type of the target (user or organization).
-     * 
+     * Check whether the GitHub target exists and matches the selected type.
+     *
+     * @param string $name The name of the target.
+     * @param SyncTargetType $type The expected account type.
+     *
      * @return bool
      */
     public function targetExists(string $name, SyncTargetType $type): bool
     {
-        $endpoint = match ($type) {
-            SyncTargetType::User => "/users/{$name}",
-            SyncTargetType::Organization => "/orgs/{$name}",
-        };
-
-        $response = $this->client()->get($endpoint);
+        $response = $this->client()->get("/users/{$name}");
 
         if ($response->notFound()) {
             return false;
@@ -105,6 +100,9 @@ class GitHubClient
 
         $response->throw();
 
-        return true;
+        return $response->json('type') === match ($type) {
+            SyncTargetType::User => 'User',
+            SyncTargetType::Organization => 'Organization',
+        };
     }
 }

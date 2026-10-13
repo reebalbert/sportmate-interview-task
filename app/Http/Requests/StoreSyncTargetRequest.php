@@ -42,4 +42,16 @@ class StoreSyncTargetRequest extends FormRequest
             'type' => ['required', Rule::enum(SyncTargetType::class)],
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.unique' => trans('validation.custom.name.unique'),
+        ];
+    }
 }
