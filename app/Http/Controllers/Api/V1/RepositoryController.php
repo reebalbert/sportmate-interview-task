@@ -11,6 +11,10 @@ class RepositoryController extends Controller
 {
     /**
      * Display a paginated listing of repositories for the specified target.
+     * 
+     * @param SyncTarget $syncTarget
+     * 
+     * @return AnonymousResourceCollection
      */
     public function index(SyncTarget $syncTarget): AnonymousResourceCollection
     {

@@ -12,6 +12,11 @@ class SyncTarget extends Model
 {
     use HasFactory;
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'type',
@@ -22,6 +27,8 @@ class SyncTarget extends Model
 
     /**
      * Get the attributes that should be cast.
+     * 
+     * @return array
      */
     protected function casts(): array
     {
@@ -34,6 +41,8 @@ class SyncTarget extends Model
 
     /**
      * Get the repositories belonging to this synchronization target.
+     * 
+     * @return HasMany
      */
     public function repositories(): HasMany
     {

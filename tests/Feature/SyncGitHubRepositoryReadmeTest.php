@@ -61,6 +61,8 @@ class SyncGitHubRepositoryReadmeTest extends TestCase
 
     /**
      * Test that a permanently failed README synchronization increments the failure counter.
+     * 
+     * @return void
      */
     public function test_it_records_failed_readme_synchronization(): void
     {
@@ -105,6 +107,8 @@ class SyncGitHubRepositoryReadmeTest extends TestCase
 
     /**
      * Test that README synchronization updates only the associated sync log.
+     * 
+     * @return void
      */
     public function test_it_updates_only_the_associated_sync_log(): void
     {

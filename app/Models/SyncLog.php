@@ -46,6 +46,8 @@ class SyncLog extends Model
 
     /**
      * Get the synchronization target associated with this log.
+     * 
+     * @return BelongsTo
      */
     public function syncTarget(): BelongsTo
     {

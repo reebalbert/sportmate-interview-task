@@ -16,15 +16,18 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure unauthenticated users cannot access synchronization targets.
+     * 
+     * @return void
      */
     public function test_it_requires_authentication(): void
     {
-        $this->getJson('/api/v1/sync-targets')
-            ->assertUnauthorized();
+        $this->getJson('/api/v1/sync-targets')->assertUnauthorized();
     }
 
     /**
      * Ensure authenticated users can retrieve synchronization targets.
+     * 
+     * @return void
      */
     public function test_it_lists_synchronization_targets(): void
     {
@@ -39,6 +42,8 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure authenticated users can retrieve a specific synchronization target.
+     * 
+     * @return void
      */
     public function test_it_shows_a_synchronization_target(): void
     {
@@ -54,6 +59,8 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure authenticated users can create synchronization targets.
+     * 
+     * @return void
      */
     public function test_it_creates_a_synchronization_target(): void
     {
@@ -76,6 +83,8 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure synchronization targets cannot have duplicate names.
+     * 
+     * @return void
      */
     public function test_it_rejects_duplicate_synchronization_target_names(): void
     {
@@ -97,6 +106,8 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure authenticated users can queue synchronization for a target.
+     * 
+     * @return void
      */
     public function test_it_queues_synchronization_for_a_target(): void
     {
@@ -120,6 +131,8 @@ class SyncTargetApiTest extends TestCase
 
     /**
      * Ensure the API returns only repositories belonging to the specified target.
+     * 
+     * @return void
      */
     public function test_it_lists_repositories_for_a_target(): void
     {

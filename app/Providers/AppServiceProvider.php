@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
+     * 
+     * @return void
      */
     public function boot(): void
     {
@@ -34,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Configure default behaviors for production-ready applications.
+     * 
+     * @return void
      */
     protected function configureDefaults(): void
     {

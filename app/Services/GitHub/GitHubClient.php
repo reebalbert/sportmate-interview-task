@@ -11,6 +11,10 @@ class GitHubClient
 {
     /**
      * Get the repositories for the given synchronization target.
+     * 
+     * @param SyncTarget $target The synchronization target (user or organization).
+     * 
+     * @return array
      */
     public function repositories(SyncTarget $target): array
     {
@@ -54,6 +58,7 @@ class GitHubClient
      * Retrieve the README content of a GitHub repository.
      * 
      * @param string $fullName The full name of the repository (e.g. `owner/name`).
+     * 
      * @return string|null
      */
     public function readme(string $fullName): ?string

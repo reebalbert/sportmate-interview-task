@@ -9,6 +9,8 @@ class SyncTargetResource extends JsonResource
 {
     /**
      * Transform the synchronization target into an array.
+     * 
+     * @param Request $request
      *
      * @return array<string, mixed>
      */

@@ -13,6 +13,11 @@ class SyncTargetService
 {
     /**
      * Queue synchronization if the target is not already syncing.
+     * 
+     * @param SyncTarget $syncTarget
+     * @param SyncLogTrigger $trigger
+     * 
+     * @return bool True if synchronization was queued, false if the target is already syncing.
      */
     public function sync(SyncTarget $syncTarget, SyncLogTrigger $trigger): bool
     {

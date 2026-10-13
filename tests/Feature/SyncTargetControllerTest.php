@@ -15,6 +15,8 @@ class SyncTargetControllerTest extends TestCase
 
     /**
      * Test that synchronization can be queued for a target.
+     * 
+     * @return void
      */
     public function test_it_queues_synchronization_for_target(): void
     {

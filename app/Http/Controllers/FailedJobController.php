@@ -12,6 +12,10 @@ class FailedJobController extends Controller
 {
     /**
      * Display the failed queue jobs.
+     * 
+     * @return \Inertia\Response
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(): Response
     {
@@ -26,6 +30,7 @@ class FailedJobController extends Controller
      * Retry the given failed queue job.
      * 
      * @param  \App\Models\FailedJob  $failedJob
+     * 
      * @return \Illuminate\Http\RedirectResponse
      */
     public function retry(FailedJob $failedJob): RedirectResponse

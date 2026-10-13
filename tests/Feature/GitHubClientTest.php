@@ -12,6 +12,8 @@ class GitHubClientTest extends TestCase
 {
     /**
      * Test that repositories can be fetched for a GitHub user.
+     * 
+     * @return void
      */
     public function test_it_fetches_repositories_for_user(): void
     {
@@ -37,6 +39,8 @@ class GitHubClientTest extends TestCase
 
     /**
      * Test that repositories can be fetched for a GitHub organization.
+     * 
+     * @return void
      */
     public function test_it_fetches_repositories_for_organization(): void
     {
@@ -62,6 +66,8 @@ class GitHubClientTest extends TestCase
 
     /**
      * Test that all repository pages are fetched.
+     * 
+     * @return void
      */
     public function test_it_fetches_paginated_repositories(): void
     {

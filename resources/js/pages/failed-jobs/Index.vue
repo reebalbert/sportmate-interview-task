@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -50,16 +51,7 @@ const retryJob = (job: FailedJob) => {
 
     <PublicNav />
 
-    <div
-        class="relative min-h-screen overflow-hidden bg-[#080b10] text-[#f0f6fc]"
-        style="
-            background-image: radial-gradient(
-                ellipse 900px 600px at 50% 0%,
-                rgba(31, 111, 235, 0.22),
-                transparent 70%
-            );
-        "
-    >
+    <div class="relative min-h-screen overflow-hidden bg-[#080b10] text-[#f0f6fc]" style="background-image: radial-gradient(ellipse 900px 600px at 50% 0%, rgba(31, 111, 235, 0.22), transparent 70%);">
         <main class="relative mx-auto w-full max-w-7xl px-6 py-12">
             <h1 class="text-4xl font-bold">
                 {{ t('failedJobs.title') }}
@@ -69,19 +61,13 @@ const retryJob = (job: FailedJob) => {
                 {{ t('failedJobs.description') }}
             </p>
 
-            <div
-                v-if="failedJobs.length === 0"
-                class="mt-8 rounded-xl border border-[#30363d] bg-[#161b22] p-8 text-[#8b949e]"
-            >
+            <div v-if="failedJobs.length === 0" class="mt-8 rounded-xl border border-[#30363d] bg-[#161b22] p-8 text-[#8b949e]">
                 {{ t('failedJobs.empty') }}
             </div>
 
             <div v-else class="mt-8 space-y-4">
-                <div
-                    v-for="job in failedJobs"
-                    :key="job.id"
-                    class="rounded-xl border border-[#30363d] bg-[#161b22] p-6"
-                >
+                <div v-for="job in failedJobs" :key="job.id" class="rounded-xl border border-[#30363d] bg-[#161b22] p-6">
+
                     <div class="flex items-center justify-between gap-6">
                         <div class="min-w-0">
                             <div class="truncate font-semibold">
@@ -104,11 +90,7 @@ const retryJob = (job: FailedJob) => {
                             :disabled="retryingJobId === job.id"
                             @click="retryJob(job)"
                         >
-                            {{
-                                retryingJobId === job.id
-                                    ? t('failedJobs.actions.retrying')
-                                    : t('failedJobs.actions.retry')
-                            }}
+                            {{ retryingJobId === job.id ? t('failedJobs.actions.retrying') : t('failedJobs.actions.retry')}}
                         </button>
                     </div>
                 </div>

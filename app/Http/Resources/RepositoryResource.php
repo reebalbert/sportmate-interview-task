@@ -9,6 +9,8 @@ class RepositoryResource extends JsonResource
 {
     /**
      * Transform the repository into an array.
+     * 
+     * @param Request $request
      *
      * @return array<string, mixed>
      */

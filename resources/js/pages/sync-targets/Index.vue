@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { Head, router, useForm, usePoll } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
@@ -171,49 +172,26 @@ defineOptions({
 
     <PublicNav />
 
-    <div
-        class="relative min-h-screen overflow-hidden bg-[#080b10] text-[#f0f6fc]"
-        style="
-            background-image: radial-gradient(
-                ellipse 900px 600px at 50% 0%,
-                rgba(31, 111, 235, 0.22),
-                transparent 70%
-            );
-        "
-    >
-        <main
-            class="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
-        >
+    <div class="relative min-h-screen overflow-hidden bg-[#080b10] text-[#f0f6fc]" style="background-image: radial-gradient( ellipse 900px 600px at 50% 0%, rgba(31, 111, 235, 0.22), transparent 70%);">
+        
+        <main class="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <!-- Hero -->
             <header class="mb-12 flex flex-col items-center text-center">
-                <div class="relative mb-6">
-                    <div
-                        class="absolute inset-0 scale-[1.8] rounded-full bg-[#1f6feb]/20 blur-2xl"
-                    ></div>
 
-                    <div
-                        class="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-[#1f6feb]/20 backdrop-blur-xl"
-                    >
-                        <img
-                            src="/favicon.png"
-                            alt=""
-                            class="h-11 w-11 rounded-xl"
-                        />
+                <div class="relative mb-6">
+                    <div class="absolute inset-0 scale-[1.8] rounded-full bg-[#1f6feb]/20 blur-2xl"></div>
+
+                    <div class="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-[#1f6feb]/20 backdrop-blur-xl">
+                        <img src="/favicon.png" alt="" class="h-11 w-11 rounded-xl" />
                     </div>
                 </div>
 
-                <div
-                    class="mb-3 flex items-center gap-2 rounded-full border border-[#30363d] bg-[#161b22]/70 px-3 py-1 text-xs font-medium text-[#8b949e] backdrop-blur"
-                >
-                    <span
-                        class="h-1.5 w-1.5 rounded-full bg-[#3fb950] shadow-[0_0_8px_#3fb950]"
-                    ></span>
-                    GitHub API
+                <div class="mb-3 flex items-center gap-2 rounded-full border border-[#30363d] bg-[#161b22]/70 px-3 py-1 text-xs font-medium text-[#8b949e] backdrop-blur">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#3fb950] shadow-[0_0_8px_#3fb950]"></span>
+                    <span>{{ t('syncTargets.githubapi') }}</span>
                 </div>
 
-                <h1
-                    class="bg-gradient-to-b from-white to-[#8b949e] bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl"
-                >
+                <h1 class="bg-gradient-to-b from-white to-[#8b949e] bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
                     {{ t('syncTargets.title') }}
                 </h1>
 
@@ -228,46 +206,29 @@ defineOptions({
                     class="absolute -inset-px rounded-2xl bg-gradient-to-r from-[#1f6feb]/30 via-[#58a6ff]/10 to-[#1f6feb]/30 blur-sm"
                 ></div>
 
-                <div
-                    class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#11161d]/90 shadow-2xl shadow-black/30 backdrop-blur-xl"
-                >
-                    <div
-                        class="flex items-center justify-between border-b border-white/[0.07] px-6 py-4"
-                    >
+                <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#11161d]/90 shadow-2xl shadow-black/30 backdrop-blur-xl">
+                    <div class="flex items-center justify-between border-b border-white/[0.07] px-6 py-4">
                         <div>
                             <h2 class="text-sm font-semibold text-[#f0f6fc]">
                                 {{ t('syncTargets.actions.add') }}
                             </h2>
 
                             <p class="mt-0.5 text-xs text-[#6e7681]">
-                                github.com/<span class="text-[#58a6ff]">{{
-                                    form.name || 'username'
-                                }}</span>
+                                github.com/<span class="text-[#58a6ff]">{{form.name || 'username'}}</span>
                             </p>
                         </div>
 
                         <div class="flex items-center gap-1.5">
-                            <span
-                                class="h-2.5 w-2.5 rounded-full bg-[#f85149]/80"
-                            ></span>
-                            <span
-                                class="h-2.5 w-2.5 rounded-full bg-[#d29922]/80"
-                            ></span>
-                            <span
-                                class="h-2.5 w-2.5 rounded-full bg-[#3fb950]/80"
-                            ></span>
+                            <span class="h-2.5 w-2.5 rounded-full bg-[#f85149]/80"></span>
+                            <span class="h-2.5 w-2.5 rounded-full bg-[#d29922]/80"></span>
+                            <span class="h-2.5 w-2.5 rounded-full bg-[#3fb950]/80"></span>
                         </div>
                     </div>
 
                     <form class="p-6" @submit.prevent="submit">
-                        <div
-                            class="grid items-start gap-4 md:grid-cols-[1fr_200px_auto]"
-                        >
+                        <div class="grid items-start gap-4 md:grid-cols-[1fr_200px_auto]">
                             <div>
-                                <label
-                                    for="name"
-                                    class="mb-2 block text-xs font-medium tracking-wider text-[#8b949e] uppercase"
-                                >
+                                <label for="name" class="mb-2 block text-xs font-medium tracking-wider text-[#8b949e] uppercase">
                                     {{ t('syncTargets.fields.name') }}
                                 </label>
 
@@ -275,25 +236,17 @@ defineOptions({
                                     id="name"
                                     v-model="form.name"
                                     type="text"
-                                    :placeholder="
-                                        t('syncTargets.fields.namePlaceholder')
-                                    "
+                                    :placeholder="t('syncTargets.fields.namePlaceholder')"
                                     class="w-full rounded-lg border border-[#30363d] bg-[#080b10]/80 px-4 py-3 text-sm text-white transition duration-200 outline-none placeholder:text-[#484f58] hover:border-[#484f58] focus:border-[#58a6ff] focus:ring-2 focus:ring-[#1f6feb]/20"
                                 />
 
-                                <p
-                                    v-if="form.errors.name"
-                                    class="mt-2 text-xs text-[#f85149]"
-                                >
+                                <p v-if="form.errors.name" class="mt-2 text-xs text-[#f85149]">
                                     {{ form.errors.name }}
                                 </p>
                             </div>
 
                             <div>
-                                <label
-                                    for="type"
-                                    class="mb-2 block text-xs font-medium tracking-wider text-[#8b949e] uppercase"
-                                >
+                                <label for="type" class="mb-2 block text-xs font-medium tracking-wider text-[#8b949e] uppercase">
                                     {{ t('syncTargets.fields.type') }}
                                 </label>
 
@@ -306,16 +259,11 @@ defineOptions({
                                         {{ t('syncTargets.types.user') }}
                                     </option>
                                     <option value="organization">
-                                        {{
-                                            t('syncTargets.types.organization')
-                                        }}
+                                        {{ t('syncTargets.types.organization')}}
                                     </option>
                                 </select>
 
-                                <p
-                                    v-if="form.errors.type"
-                                    class="mt-2 text-xs text-[#f85149]"
-                                >
+                                <p v-if="form.errors.type" class="mt-2 text-xs text-[#f85149]">
                                     {{ form.errors.type }}
                                 </p>
                             </div>
@@ -326,11 +274,7 @@ defineOptions({
                                 class="group relative mt-[26px] overflow-hidden rounded-lg bg-[#238636] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#238636]/10 transition duration-200 hover:-translate-y-0.5 hover:bg-[#2ea043] hover:shadow-[#238636]/20 disabled:pointer-events-none disabled:opacity-50"
                             >
                                 <span class="relative">
-                                    {{
-                                        form.processing
-                                            ? t('syncTargets.actions.adding')
-                                            : t('syncTargets.actions.add')
-                                    }}
+                                    {{ form.processing ? t('syncTargets.actions.adding') : t('syncTargets.actions.add') }}
                                 </span>
                             </button>
                         </div>
@@ -355,40 +299,25 @@ defineOptions({
             >
                 <!-- Target header -->
                 <div class="border-b border-white/[0.07]">
-                    <div
-                        class="flex flex-col gap-5 px-6 py-6 sm:flex-row sm:items-center sm:justify-between"
-                    >
+                    <div class="flex flex-col gap-5 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
                         <div class="flex items-center gap-4">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-xl border border-[#58a6ff]/20 bg-[#58a6ff]/10 text-lg font-bold text-[#58a6ff] shadow-[0_0_25px_rgba(88,166,255,0.08)]"
-                            >
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-[#58a6ff]/20 bg-[#58a6ff]/10 text-lg font-bold text-[#58a6ff] shadow-[0_0_25px_rgba(88,166,255,0.08)]">
                                 {{ target.name.charAt(0).toUpperCase() }}
                             </div>
 
                             <div>
                                 <div class="flex flex-wrap items-center gap-2">
-                                    <h2
-                                        class="text-lg font-semibold tracking-tight text-white"
-                                    >
+                                    <h2 class="text-lg font-semibold tracking-tight text-white">
                                         {{ target.name }}
                                     </h2>
 
-                                    <span
-                                        class="rounded-full border border-[#30363d] bg-[#21262d] px-2.5 py-0.5 text-[11px] font-medium text-[#8b949e]"
-                                    >
-                                        {{
-                                            t(
-                                                `syncTargets.types.${target.type}`,
-                                            )
-                                        }}
+                                    <span class="rounded-full border border-[#30363d] bg-[#21262d] px-2.5 py-0.5 text-[11px] font-medium text-[#8b949e]">
+                                        {{ t(`syncTargets.types.${target.type}`) }}
                                     </span>
                                 </div>
 
-                                <div
-                                    class="mt-1.5 flex items-center gap-2 text-xs text-[#8b949e]"
-                                >
-                                    <span
-                                        class="h-2 w-2 rounded-full"
+                                <div class="mt-1.5 flex items-center gap-2 text-xs text-[#8b949e]">
+                                    <span class="h-2 w-2 rounded-full"
                                         :class="{
                                             'bg-[#3fb950] shadow-[0_0_8px_#3fb950]':
                                                 target.status === 'synced',
@@ -397,22 +326,15 @@ defineOptions({
                                             'bg-[#f85149] shadow-[0_0_8px_#f85149]':
                                                 target.status === 'failed',
                                             'bg-[#6e7681]':
-                                                target.status ===
-                                                'never_synced',
+                                                target.status === 'never_synced',
                                         }"
                                     />
 
-                                    <span>{{
-                                        t(
-                                            `syncTargets.statuses.${target.status}`,
-                                        )
-                                    }}</span>
+                                    <span>{{ t(`syncTargets.statuses.${target.status}`) }}</span>
 
                                     <template v-if="target.last_synced_at">
                                         <span class="text-[#484f58]">•</span>
-                                        <span>{{
-                                            formatDate(target.last_synced_at)
-                                        }}</span>
+                                        <span>{{ formatDate(target.last_synced_at) }}</span>
                                     </template>
                                 </div>
                             </div>
@@ -424,60 +346,35 @@ defineOptions({
                             :disabled="target.status === 'syncing'"
                             @click="sync(target)"
                         >
-                            <span
-                                class="text-lg leading-none text-[#58a6ff] transition-transform duration-500 group-hover:rotate-180"
-                                >↻</span
-                            >
-                            {{
-                                target.status === 'syncing'
-                                    ? t('syncTargets.actions.syncing')
-                                    : t('syncTargets.actions.sync')
-                            }}
+                            <span class="text-lg leading-none text-[#58a6ff] transition-transform duration-500 group-hover:rotate-180">↻</span>
+                            {{ target.status === 'syncing' ? t('syncTargets.actions.syncing') : t('syncTargets.actions.sync') }}
                         </button>
                     </div>
 
-                    <div
-                        class="grid grid-cols-3 border-t border-white/[0.05] bg-black/10"
-                    >
+                    <div class="grid grid-cols-3 border-t border-white/[0.05] bg-black/10">
                         <div class="px-6 py-5">
-                            <div
-                                class="text-2xl font-semibold tracking-tight text-white"
-                            >
+                            <div class="text-2xl font-semibold tracking-tight text-white">
                                 {{ target.repositories_count }}
                             </div>
-                            <div
-                                class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase"
-                            >
+                            <div class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase">
                                 {{ t('syncTargets.stats.repositories') }}
                             </div>
                         </div>
 
-                        <div
-                            class="border-l border-white/[0.05] px-6 py-5"
-                        >
-                            <div
-                                class="text-2xl font-semibold tracking-tight text-white"
-                            >
+                        <div class="border-l border-white/[0.05] px-6 py-5">
+                            <div class="text-2xl font-semibold tracking-tight text-white">
                                 {{ formatNumber(target.total_stars ?? 0) }}
                             </div>
-                            <div
-                                class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase"
-                            >
+                            <div class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase">
                                 {{ t('syncTargets.stats.stars') }}
                             </div>
                         </div>
 
-                        <div
-                            class="border-l border-white/[0.05] px-6 py-5"
-                        >
-                            <div
-                                class="text-2xl font-semibold tracking-tight text-white"
-                            >
+                        <div class="border-l border-white/[0.05] px-6 py-5">
+                            <div class="text-2xl font-semibold tracking-tight text-white">
                                 {{ formatNumber(target.total_issues ?? 0) }}
                             </div>
-                            <div
-                                class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase"
-                            >
+                            <div class="mt-1 text-[10px] font-semibold tracking-[0.16em] text-[#6e7681] uppercase">
                                 {{ t('syncTargets.stats.issues') }}
                             </div>
                         </div>
@@ -496,9 +393,7 @@ defineOptions({
                     <div class="mb-4 flex items-center justify-between">
                         <h3 class="font-semibold">
                             {{ t('syncTargets.repositories.title') }}
-                            <span
-                                class="ml-1 text-sm font-normal text-[#8b949e]"
-                            >
+                            <span class="ml-1 text-sm font-normal text-[#8b949e]">
                                 {{ target.repositories.length }}
                             </span>
                         </h3>
@@ -508,9 +403,7 @@ defineOptions({
                         <input
                             v-model="getFilter(target.id).search"
                             type="search"
-                            :placeholder="
-                                t('syncTargets.repositories.searchPlaceholder')
-                            "
+                            :placeholder="t('syncTargets.repositories.searchPlaceholder')"
                             :aria-label="t('syncTargets.repositories.search')"
                             @input="searchRepositories(target.id)"
                             class="min-w-0 flex-1 rounded-md border border-[#30363d] bg-[#0d1117] px-3 py-2 text-sm text-[#f0f6fc] transition outline-none placeholder:text-[#6e7681] focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff]"
@@ -519,24 +412,14 @@ defineOptions({
                         <select
                             v-model="getFilter(target.id).language"
                             @change="getFilter(target.id).page = 1"
-                            :aria-label="
-                                t('syncTargets.repositories.language')
-                            "
+                            :aria-label="t('syncTargets.repositories.language')"
                             class="rounded-md border border-[#30363d] bg-[#21262d] px-3 py-2 text-sm text-[#f0f6fc] transition outline-none focus:border-[#58a6ff] sm:w-52"
                         >
                             <option value="">
-                                {{
-                                    t(
-                                        'syncTargets.repositories.allLanguages',
-                                    )
-                                }}
+                                {{ t('syncTargets.repositories.allLanguages') }}
                             </option>
 
-                            <option
-                                v-for="item in languages(target)"
-                                :key="item"
-                                :value="item"
-                            >
+                            <option v-for="item in languages(target)" :key="item" :value="item">
                                 {{ item }}
                             </option>
                         </select>
@@ -544,17 +427,11 @@ defineOptions({
                 </div>
 
                 <!-- Repositories -->
-                <div
-                    v-if="target.repositories_count === 0"
-                    class="px-6 py-10 text-center text-sm text-[#8b949e]"
-                >
+                <div v-if="target.repositories_count === 0" class="px-6 py-10 text-center text-sm text-[#8b949e]">
                     {{ t('syncTargets.repositories.empty') }}
                 </div>
 
-                <div
-                    v-else-if="filteredRepositories(target).length > 0"
-                    class="divide-y divide-[#30363d]"
-                >
+                <div v-else-if="filteredRepositories(target).length > 0" class="divide-y divide-[#30363d]">
                     <article
                         v-for="repository in paginatedRepositories(target)"
                         :key="repository.id"
@@ -562,42 +439,28 @@ defineOptions({
                     >
                         <div class="min-w-0">
                             <div class="flex flex-wrap items-center gap-2">
-                                <a
-                                    :href="repository.html_url"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="truncate font-semibold text-[#58a6ff] hover:underline"
-                                >
+                                <a :href="repository.html_url" target="_blank" rel="noopener noreferrer" class="truncate font-semibold text-[#58a6ff] hover:underline">
                                     {{ repository.full_name }}
                                 </a>
 
-                                <span
-                                    v-if="repository.archived"
-                                    class="rounded-full border border-[#30363d] px-2 py-0.5 text-xs text-[#8b949e]"
-                                >
-                                    {{
-                                        t(
-                                            'syncTargets.repositories.archived',
-                                        )
-                                    }}
+                                <span v-if="repository.archived" class="rounded-full border border-[#30363d] px-2 py-0.5 text-xs text-[#8b949e]">
+                                    {{ t('syncTargets.repositories.archived')}}
                                 </span>
                             </div>
 
-                            <p
-                                v-if="repository.description"
-                                class="mt-1.5 max-w-3xl text-sm leading-5 text-[#8b949e]"
-                            >
+                            <p v-if="repository.description" class="mt-1.5 max-w-3xl text-sm leading-5 text-[#8b949e]">
                                 {{ repository.description }}
+                            </p>
+
+                            <p v-if="repository.github_updated_at" class="mt-2 text-xs text-[#8b949e]">
+                                {{ t('syncTargets.repositories.lastUpdated') }}:
+                                {{ formatDate(repository.github_updated_at) }}
                             </p>
                         </div>
 
-                        <div
-                            class="flex shrink-0 flex-wrap items-center gap-4 text-xs text-[#8b949e]"
-                        >
-                            <span
-                                v-if="repository.language"
-                                class="rounded-md bg-[#21262d] px-2.5 py-1"
-                            >
+                        <div class="flex shrink-0 flex-wrap items-center gap-4 text-xs text-[#8b949e]">
+                            
+                            <span v-if="repository.language" class="rounded-md bg-[#21262d] px-2.5 py-1">
                                 {{ repository.language }}
                             </span>
 
@@ -610,18 +473,12 @@ defineOptions({
                     </article>
                 </div>
 
-                <div
-                    v-else
-                    class="px-6 py-10 text-center text-sm text-[#8b949e]"
-                >
+                <div v-else class="px-6 py-10 text-center text-sm text-[#8b949e]">
                     {{ t('syncTargets.repositories.noResults') }}
                 </div>
 
                 <!-- Pagination -->
-                <div
-                    v-if="totalPages(target) > 1"
-                    class="flex items-center justify-between border-t border-[#30363d] px-6 py-4"
-                >
+                <div v-if="totalPages(target) > 1" class="flex items-center justify-between border-t border-[#30363d] px-6 py-4">
                     <button
                         type="button"
                         :disabled="getFilter(target.id).page === 1"
@@ -638,9 +495,7 @@ defineOptions({
 
                     <button
                         type="button"
-                        :disabled="
-                            getFilter(target.id).page === totalPages(target)
-                        "
+                        :disabled="getFilter(target.id).page === totalPages(target)"
                         class="rounded-md border border-[#30363d] px-3 py-1.5 text-sm text-[#c9d1d9] transition hover:bg-[#21262d] disabled:cursor-not-allowed disabled:opacity-40"
                         @click="getFilter(target.id).page++"
                     >

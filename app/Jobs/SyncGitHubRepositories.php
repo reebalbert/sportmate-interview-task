@@ -51,6 +51,7 @@ class SyncGitHubRepositories implements ShouldQueue
     {
         $syncLog = SyncLog::findOrFail($this->syncLogId);
 
+        // Update the sync target status to indicate that synchronization is in progress
         $this->target->update([
             'status' => SyncStatus::Syncing,
             'last_error' => null,
@@ -61,6 +62,7 @@ class SyncGitHubRepositories implements ShouldQueue
         $created = 0;
         $updated = 0;
 
+        // Update or create repositories in the database
         foreach ($repositories as $repository) {
             $savedRepository = $this->target->repositories()->updateOrCreate(
                 ['github_id' => $repository['id']],
@@ -91,16 +93,19 @@ class SyncGitHubRepositories implements ShouldQueue
 
         $githubRepositoryIds = collect($repositories)->pluck('id');
 
+        // Delete repositories that are no longer present in GitHub
         $deleted = $this->target->repositories()
             ->whereNotIn('github_id', $githubRepositoryIds)
             ->delete();
 
+        // Update the sync target and log with the results
         $this->target->update([
             'status' => SyncStatus::Synced,
             'last_synced_at' => now(),
             'last_error' => null,
         ]);
 
+        // Update the sync log with the results
         $syncLog->update([
             'status' => SyncLogStatus::Success,
             'finished_at' => now(),
@@ -139,6 +144,7 @@ class SyncGitHubRepositories implements ShouldQueue
      * Handle a permanently failed synchronization.
      * 
      * @param Throwable $exception
+     * 
      * @return void
      */
     public function failed(Throwable $exception): void
