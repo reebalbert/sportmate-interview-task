@@ -42,5 +42,8 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
 
-      - name: Run CI Checks
-        run: composer ci:check
+      - name: Run Tests
+        run: php artisan test
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
