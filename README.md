@@ -9,7 +9,7 @@ The application allows synchronization targets to be added, synchronizes their r
 - Add GitHub users and organizations as synchronization targets
 - Prevent duplicate synchronization targets
 - Synchronize repositories asynchronously using Laravel queues
-- Store, update, and reconcile repository data locally
+- Store, update, and remove repository data locally
 - Track synchronization status, last successful synchronization time, and errors
 - Retry temporary synchronization failures with backoff
 - Prevent overlapping synchronization jobs for the same target
@@ -63,30 +63,24 @@ php artisan migrate
 Start the development environment:
 
 ```bash
-composer run dev
+php artisan serve
 ```
 
 Alternatively, compile the frontend assets for production:
 
 ```bash
-npm run build
+npm run dev
 ```
 
 ### Queue Worker
 
 Repository synchronization is processed asynchronously using Laravel queues.
 
-Make sure the queue connection is configured correctly in `.env` and a queue worker is running:
+Make sure the queue connection is configured in .env and start a queue worker:
 
 ```bash
 php artisan queue:work
 ```
-
-Without a running queue worker, synchronization jobs will remain pending.
-
-For production, run queue workers under a process supervisor (for example, Supervisor or systemd), configure automatic restarts, and restart workers during deployment so they load the latest application code. Ensure the queue backend and cache lock backend are accessible to all workers. The queue connection's `retry_after` must be longer than the job timeout to avoid premature redelivery.
-
-Monitor queue worker health, the `failed_jobs` table, synchronization target statuses, and the age of the last successful synchronization. The Failed Jobs page is useful for inspection and manual retries; production deployments should also add alerting for repeated failures or stalled workers. These operational recommendations are not claims that automated alerting has been implemented.
 
 ### Scheduler
 
@@ -94,12 +88,6 @@ For local development, scheduled synchronization can be executed using:
 
 ```bash
 php artisan schedule:work
-```
-
-In production, Laravel's scheduler should be triggered every minute:
-
-```cron
-* * * * * cd /path/to/project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## GitHub API
@@ -270,10 +258,6 @@ The user interface also provides programming-language filtering and pagination.
 
 Search and filtering operate on locally stored repository data rather than making a new GitHub API request for every user interaction.
 
-### Cache and Invalidation
-
-Repository searches and listings read from the local database rather than a separately cached copy of GitHub responses. The frontend uses polling to request updated status/data. No separate application-level repository-result cache or explicit invalidation workflow is documented for this implementation; therefore synchronization updates become visible through subsequent database-backed requests. Laravel's cache locks used for job coordination are a separate concern from caching repository search results.
-
 ## Failed Jobs
 
 Failed queue jobs can be viewed on the Failed Jobs page.
@@ -293,16 +277,18 @@ php artisan test
 
 The test suite includes coverage for:
 
-- Fetching repositories for GitHub users
-- Fetching repositories for GitHub organizations
+- Fetching repositories for GitHub users and organizations
 - GitHub API pagination
 - Storing synchronized repositories
 - Updating existing repositories without creating duplicates
 - Synchronization failure handling
+- README content synchronization and failure handling
+- Synchronization logging and statistics
+- Preventing duplicate synchronization requests
 - Dispatching synchronization through the controller
+- Scheduled synchronization handling
 - REST API authentication
-- Retrieving synchronization targets through the API
-- Creating synchronization targets through the API
+- Retrieving and creating synchronization targets through the API
 - Rejecting duplicate synchronization target names
 - Queuing synchronization through the API
 - Retrieving repositories belonging to a specific synchronization target
@@ -361,8 +347,6 @@ Important considerations include:
 - **GitHub repository ID:** a unique constraint prevents duplicate repository records during repeated synchronizations.
 - **Synchronization target foreign key:** supports the relationship between repositories and their synchronization target.
 - **Repository text fields:** a MySQL FULLTEXT index supports searching repository names, descriptions, and README content.
-
-Indexes should reflect actual query patterns rather than being added to every column. Foreign-key and uniqueness constraints are particularly important because they also enforce data integrity.
 
 ### Frontend
 
@@ -435,17 +419,18 @@ The main assignment workflow and the optional features listed above have been im
 
 ### What I Would Implement Next
 
-My first priority would be to strengthen reliability and test coverage around API failures, incomplete paginated responses, reconciliation, and overlapping queue jobs. Next, I would improve rate-limit handling and secure operational pages. If the application were intended for multiple users, I would introduce ownership-based authorization and data isolation before expanding the REST API further.
+My first priority would be to improve reliability and expand test coverage for GitHub API failures, concurrent synchronization, and retry scenarios. I would also enhance GitHub rate-limit handling and restrict access to operational pages, particularly the Failed Jobs page.
+
+For a multi-user application, I would introduce user-level ownership and authorization for synchronization targets before extending the REST API further.
 
 ### Important Compromises and Shortcuts
 
-- **Polling instead of WebSockets:** The interface periodically refreshes synchronization status. This is simpler to operate and sufficient for the assignment, but it is not truly real-time.
-- **Shared synchronization targets:** Targets are not isolated by authenticated user. This avoids introducing a full ownership and authorization model for an interview assignment, but would need to change before a multi-user production deployment.
-- **Laravel's built-in queue infrastructure:** I used standard Laravel jobs, retries, middleware, and scheduling instead of adding a separate messaging platform. This keeps the solution straightforward and appropriate to its scale.
-- **Basic API rate-limit handling:** The integration supports the primary synchronization workflow, but does not include advanced rate-limit-aware scheduling or monitoring.
-- **Selective test coverage:** Automated tests cover important backend and API behavior, but not every frontend interaction or production failure scenario.
+- **Polling instead of WebSockets:** The interface periodically refreshes synchronization status. This approach is sufficient for the assignment, although it does not provide instant updates.
+- **Shared synchronization targets:** Targets are not isolated by authenticated user. This simplifies the implementation but would require additional authorization for a multi-user deployment.
+- **GitHub rate-limit handling:** The existing retry and backoff mechanisms handle temporary failures, but retries are not scheduled based on GitHub's rate-limit response headers.
+- **Selective test coverage:** Automated tests cover the main backend and API functionality, but do not include comprehensive frontend testing or every possible failure scenario.
 
-These were scope decisions rather than unfinished core synchronization functionality.
+These were deliberate scope decisions rather than unfinished core functionality.
 
 ## AI Usage
 
